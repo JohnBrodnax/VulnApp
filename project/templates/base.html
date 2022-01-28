@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VulnApp</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!-- Bulma Version 0.9.0-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.3/css/bulma.min.css" />
+</head>
+
+<body>
+    <!-- START NAV -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="../">
+                    <img class="is-rounded" src="{{ url_for('static', filename='cat.png')}}" alt="Logo">
+                </a>
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                <span></span>
+                <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            Home
+                    </a>
+                    <a href="{{ url_for('main.blog') }}" class="navbar-item">
+                            Blog
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                                Account
+                            </a>
+                        <div class="navbar-dropdown">
+                            <a href="{{ url_for('main.account') }}" class="navbar-item">
+                                Settings
+                            </a>
+                            <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                                Profile
+                            </a>
+                            <hr class="navbar-divider">
+                            <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAV -->
+
+    <!-- START TITLE -->
+    <section class="hero is-primary is-medium is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block vtitle %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+    <!-- END TITLE -->
+
+    <div class="container">
+        <!-- START ARTICLE FEED -->
+        <section class="articles">
+            <div class="column is-8 is-offset-2" id="xsscomment">
+                <!-- START ARTICLE -->
+                {% block cardcontent %}
+
+                {% endblock %}
+                <!-- END ARTICLE -->
+            </div>
+        </section>
+        <!-- END ARTICLE FEED -->
+        </div>
+        {% block myscripts %}
+
+        {% endblock %}
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        //The first argument are the elements to which the plugin shall be initialized
+        //The second argument has to be at least a empty object or a object with your desired options
+        OverlayScrollbars(document.querySelectorAll("body"), { });
+        });
+        </script>
+</body>
+
+</html>
+
+
+
+
+
+
+      

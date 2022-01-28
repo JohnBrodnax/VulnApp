@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block vtitle %}
+<h1 class="title">
+  VulnApp Account Settings
+</h1>
+<h2 class="subtitle">
+  Burgers and diamonds aren't cheap; make sure your password ain't weak.
+</h2>
+{% endblock %}
+
+{% block cardcontent %}
+<div class="card article">
+<div class="card-content">
+    <h3 class="title">Update Username</h3>
+    <div class="box">
+        <form method="POST" action="/account">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="name" name="name" placeholder="New Username" autofocus="">
+                </div>
+            </div>
+            <button class="button is-warning">Update</button>
+        </form>
+    </div>
+    <h4 class="title">Update Password</h4>
+    <div class="box">
+        <form method="POST" action="/account">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="New Password">
+                </div>
+            </div>
+            <button class="button is-danger">Update</button>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block vtitle %}
+<h1 class="title">
+  VulnApp Admin Page
+</h1>
+<h2 class="subtitle">
+  A page only for the people who we can truly trust.
+</h2>
+{% endblock %}
+
+{% block cardcontent %}
+<div class="card article">
+<div class="card-content">
+    <h3 class="title">Reset All Comments</h3>
+    <div class="box">
+        <form method="GET" action="/admin/resetcomments">
+            <button class="button is-info">Reset</button>
+        </form>
+    </div>
+    <h4 class="title">Reset All Users <i>[Under Construction]</i></h4>
+    <div class="box">
+        <form method="GET" action="#">
+            <button class="button is-danger">Reset</button>
+        </form>
+    </div>
+    <h5 class="title">Blackmail Users <i>[Under Construction]</i></h4>
+    <div class="box">
+        <form method="GET" action="#">
+            <button class="button is-danger">Do it.</button>
+        </form>
+    </div>
+    <h6 class="title">Steal User Passwords <i>[Under Construction]</i></h4>
+    <div class="box">
+        <form method="GET" action="#">
+            <button class="button is-danger">Why not?</button>
+        </form>
+    </div>
+    <h7 class="title">Embezzlement?? <i>[Under Construction]</i></h4>
+    <div class="box">
+        <form method="GET" action="#">
+            <button class="button is-danger">Always fun!</button>
+        </form>
+    </div>
+    <h8 class="title">Steal Money From the Homeless! <i>[Under Construction]</i></h4>
+    <div class="box">
+        <form method="GET" action="#">
+            <button class="button is-danger">Fuck it.</button>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

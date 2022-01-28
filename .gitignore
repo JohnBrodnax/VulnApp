@@ -1,0 +1,15 @@
+# Databases #
+#############
+*.sqlite
+
+# Burp Project #
+################
+*.burp
+
+# Virtual Env #
+###############
+vulnapp/
+
+# PyCache #
+###########
+project/__pycache__/

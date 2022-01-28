@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block vtitle %}
+<h1 class="title">
+  VulnApp Blog
+</h1>
+<h2 class="subtitle">
+  Real people know stuff. So start being real.
+</h2>
+{% endblock %}
+
+{% block cardcontent %}
+<div class="card article">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content has-text-centered">
+                <p class="title article-title">Felis Catus vs. Felis Catictus</p>
+                <div class="tags has-addons level-item">
+                    <span class="tag is-rounded is-info">@poundinputh</span>
+                    <span class="tag is-rounded">May 10, 202X</span>
+                </div>
+            </div>
+        </div>
+        <div class="content article-body">
+            <p>Non arcu risus quis varius quam quisque. Dictum varius duis at consectetur lorem. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. </p>
+            <p>Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Accumsan lacus vel facilisis volutpat. Non sodales neque sodales ut etiam.
+                Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus.</p>
+                <figure>
+                  <img class="is-rounded" src="{{ url_for('static', filename='cat-square-256.jpg')}}">
+                  <img class="is-rounded" src="{{ url_for('static', filename='catctus.jpeg')}}">
+                  <figcaption>
+                    Figure 1. Felis Catictus (right)
+                  </figcaption>
+                </figure>
+            <h3 class="has-text-centered">Gettin' Brain Makes You Smarter</h3>
+            <p> Dictum varius duis at consectetur lorem.: <pre>Head = Cred</pre>
+                Voluptat ut farmacium tellus in metus vulputate. Feugiat in fermentum posuere urna nec. Pharetra convallis posuere morbi leo urna molestie.
+                Accumsan lacus vel facilisis volutpat est velit egestas. Fermentum leo vel orci porta. Faucibus interdum posuere lorem ipsum.</p>
+        </div>
+    </div>
+
+    <div class="box form-box">
+      <form method="POST" action="/comment">
+      <div class="field">
+        <label class="label">
+        Feeling opinionated? Make sure people know by commenting below:
+        </label>
+        <div class="control">
+          <input placeholder="Textarea" class="textarea" name="comment" type="text"></input>
+        </div>
+      </div>
+        <button class="button is-primary">Submit</button>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block myscripts %}
+<!-- [VULN - Cross-Site Scripting]
+Remediation - HTML encode any user-supplied data that ends-up within, well, HTML...
+  This could be done either server-side, or client-side when data is in-bound to the page.
+  e.g. within the create_comments() function below. Never rely on client-side encoding when
+  user data is out-bound from the page, i.e. when the comment is submitted. This is because 
+  the user can just leverage a web proxy tool, like Burp Suite, to edit the data in-transit.
+  -->
+<script>
+function create_comments(){
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.onload = function(){
+    const cmtObj = JSON.parse(this.responseText)
+    let text = "";
+    for (let x in cmtObj){
+      text += "<div class=\"box\"><article class=\"media\"><div class=\"media-left\"><figure class=\"image is-64x64\"><img src=\"{{ url_for('static', filename='catctus.jpeg')}}\" alt=\"Image\"></figure></div><div class=\"media-content\"><div class=\"content\">";
+      text += "<p><strong>" + cmtObj[x].name + "</strong> <small>@tweeter</small> ";
+      text += "<small>69m</small><br>";
+      text += cmtObj[x].content + "</p>";
+      text += "</div></div></article></div>\n\n";
+    }
+    document.getElementById("xsscomment").innerHTML += text;
+  }
+  xmlhttp.open("GET", "comment");
+  xmlhttp.send();
+}
+create_comments();
+</script>
+{% endblock %}
+
