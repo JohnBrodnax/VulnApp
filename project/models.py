@@ -107,11 +107,12 @@ class Session:
 			return None
 
 		self.session_id = None
-		self.user.session = ""
+		self.user.session = None
 		db.session.commit()
 		print("Ended session for user: %s" % (self.user.name))
 
 		resp.set_cookie(self.cookey, '', expires=0)
+		resp.set_cookie('is_admin', '', expires=0)
 		return (resp)
 
 	# Pull the session_id from the cookie and return this Session object
